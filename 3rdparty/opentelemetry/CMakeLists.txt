@@ -4,7 +4,6 @@ FetchContent_Declare(
         opentelemetry-proto
         URL         https://github.com/open-telemetry/opentelemetry-proto/archive/refs/tags/v1.1.0.zip
         URL_HASH    MD5=7715f9794ef9e23a5e5853195a3cf01c
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_MakeAvailable(opentelemetry-proto)
@@ -63,7 +62,7 @@ target_include_directories(opentelemetry-proto-cpp
 add_custom_command(
         OUTPUT ${PROTO_GEN_CPP}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}
-        COMMAND ${Protobuf_PROTOC_EXECUTABLE} --proto_path=${OpenTelemetryProto_SRC} --cpp_out=${CMAKE_CURRENT_BINARY_DIR} ${PROTO_FILES}
+        COMMAND ${Protobuf_PROTOC_EXECUTABLE} --experimental_allow_proto3_optional --proto_path=${OpenTelemetryProto_SRC} --cpp_out=${CMAKE_CURRENT_BINARY_DIR} ${PROTO_FILES}
         VERBATIM
 )
 
