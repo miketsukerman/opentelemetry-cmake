@@ -1,8 +1,14 @@
 include(FetchContent)
 
+set(OTLP_VERSION_MAJOR 1)
+set(OTLP_VERSION_MINOR 1)
+set(OTLP_VERSION_PATCH 0)
+
+set(OTLP_VERSION ${OTLP_VERSION_MAJOR}.${OTLP_VERSION_MINOR}.${OTLP_VERSION_PATCH})
+
 FetchContent_Declare(
         opentelemetry-proto
-        URL         https://github.com/open-telemetry/opentelemetry-proto/archive/refs/tags/v1.1.0.zip
+        URL         https://github.com/open-telemetry/opentelemetry-proto/archive/refs/tags/v${OTLP_VERSION}.zip
         URL_HASH    MD5=7715f9794ef9e23a5e5853195a3cf01c
 )
 
@@ -47,9 +53,14 @@ set(PROTO_GEN_CPP
 
 find_package(Protobuf REQUIRED)
 
-add_library(opentelemetry-proto-cpp
+add_library(opentelemetry-proto-cpp SHARED
     ${PROTO_GEN_CPP}
 )
+
+set_target_properties(opentelemetry-proto-cpp  PROPERTIES
+	  VERSION ${OTLP_VERSION}
+	  SOVERSION ${OTLP_VERSION_MAJOR}
+	)
 
 target_link_libraries(opentelemetry-proto-cpp  ${Protobuf_LIBRARIES})
 
