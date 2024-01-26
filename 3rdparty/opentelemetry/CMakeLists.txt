@@ -78,3 +78,5 @@ add_custom_command(
 )
 
 target_compile_features(opentelemetry-proto-cpp PRIVATE cxx_std_17)
+
+target_compile_options(opentelemetry-proto-cpp PRIVATE -Wno-useless-cast)
