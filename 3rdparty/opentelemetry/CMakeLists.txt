@@ -73,7 +73,7 @@ target_include_directories(opentelemetry-proto-cpp
 add_custom_command(
         OUTPUT ${PROTO_GEN_CPP}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}
-        COMMAND ${Protobuf_PROTOC_EXECUTABLE} --experimental_allow_proto3_optional --proto_path=${OpenTelemetryProto_SRC} --cpp_out=${CMAKE_CURRENT_BINARY_DIR} ${PROTO_FILES}
+        COMMAND ${Protobuf_PROTOC_EXECUTABLE} --experimental_allow_proto3_optional --proto_path=${OpenTelemetryProto_SRC} --cpp_out=lite:${CMAKE_CURRENT_BINARY_DIR} ${PROTO_FILES}
         VERBATIM
 )
 
